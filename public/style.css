@@ -1,0 +1,177 @@
+h2 {
+  font-size: 18px;
+  padding: 10px 20px;
+  color: #575ed8;
+}
+#main-chat {
+  height: 95vh;
+  margin: 12px auto;
+  padding: 25px;
+}
+#chat-window {
+  height: 52vh;
+  background: #f9f9f9;
+  overflow: auto;
+}
+.message-blob:first-child {
+  padding: 8px;
+  width: auto;
+  height: auto;
+  margin-top: 36px;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.message-blob:first-child > .card-panel {
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+.message-blob > .card-panel {
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+.message-blob.message-item-mine > .card-panel {
+  background-color: #f1f1f1 !important;
+}
+.message-blob.message-item-other > .card-panel {
+  background-color: #ffffff !important;
+}
+.message-blob {
+  padding: 8px;
+  width: auto;
+  height: auto;
+  margin-top: -21px;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.message-blob.message-item-mine {
+  float: right;
+  clear: both;
+  max-width: 90%;
+}
+.message-blob.message-item-other {
+  float: left;
+  clear: both;
+  max-width: 90%;
+}
+#typing p {
+  position: absolute;
+  color: #aaa;
+  padding: 50% 0px;
+  margin: 0 20px;
+  text-align: center;
+}
+#output strong {
+  width: 100%;
+  float: left;
+}
+.recipient.me {
+  color: #0ab59f;
+}
+.recipient.other {
+  color: #51ab63;
+}
+#send {
+  width: 100%;
+}
+#set-id {
+  width: 45%;
+  margin: 2px;
+}
+#start-chat {
+  width: 45%;
+  float: right;
+  margin: 2px;
+}
+#num-users {
+  padding-top: 10px;
+  text-align: center;
+  color: #333;
+}
+#handle {
+  width: 100%;
+}
+.overlay {
+  height: 0px;
+  width: 600px;
+  position: absolute;
+  z-index: 1;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow-y: auto;
+  transition: 0.5s;
+  color: #fff;
+}
+.overlay-content {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-top: 70px;
+}
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+}
+.overlay a:hover,
+.overlay a:focus {
+  color: #575ed8;
+}
+.overlay .closebtn {
+  position: absolute;
+  font-size: 45px;
+  margin-top: 10px;
+  top: 0px;
+  left: 45%;
+  text-align: center;
+  width: 38px;
+  height: 45px;
+  border: 3px solid #f1f1f1;
+  background-color: #f1f1f1;
+  color: #333;
+  border-radius: 50%;
+  padding-top: 0px;
+}
+@media only screen and (max-width: 600px) {
+  #handle {
+    width: 100%;
+  }
+  .modal-trigger {
+    left: 40% !important;
+    margin-top: 20px;
+    position: fixed !important;
+  }
+}
+#open-user-list {
+  width: 600px;
+  position: absolute;
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+}
+.modal {
+  position: fixed !important;
+  text-align: center;
+  overflow-y: scroll;
+}
+.material-icons {
+  vertical-align: middle;
+}
+.modal-close {
+  margin-top: 10px;
+}
+.btn-floating.modal-trigger {
+  left: calc(50% - 28px) !important;
+  margin-top: 5px;
+  position: fixed !important;
+}
+.greet-bot {
+  white-space: pre-line;
+}
