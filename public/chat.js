@@ -167,4 +167,70 @@ numusers.innerHTML =
   "there's no user online Now, Maybe call your friends and have a game";
 socket.on("users count", data => {
   numusers.innerHTML = "<strong> There are " + data + " user(s) online...";
+  //displayNotification(data);
 });
+
+/*
+Notification.requestPermission(function(status) {
+  console.log("Notification permission status:", status);
+  if (Notification.permission == "granted") {
+    displayNotification();
+  }
+});
+
+function displayNotification(num) {
+  if (Notification.permission == "granted") {
+    navigator.serviceWorker.getRegistration().then(function(reg) {
+      reg.showNotification(
+        "There are " + num + "users online. Go Chat! Have Fun"
+      );
+    });
+  }
+}*/
+
+const publicVapidKey =
+  "BKhdDA-ug_AyH77FhQ6_t8YafwxJGgDECUnJgDgLehq7xM0Dde3iHrObcBCjDF7eqQ1F8rJTAu-5JA3HRAgIwm0";
+
+if ("serviceWorker" in navigator) {
+  console.log("Registering service worker");
+
+  run().catch(error => console.error(error));
+}
+
+function urlBase64ToUint8Array(base64String) {
+  var padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+  var base64 = (base64String + padding).replace(/\-/g, "+").replace(/_/g, "/");
+
+  var rawData = window.atob(base64);
+  var outputArray = new Uint8Array(rawData.length);
+
+  for (var i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+async function run() {
+  console.log("Registering service worker");
+  const registration = await navigator.serviceWorker.register("/sw.js", {
+    scope: "/"
+  });
+  console.log("Registered service worker");
+
+  console.log("Registering push");
+  const subscription = await registration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+  });
+  console.log("Registered push");
+
+  console.log("Sending push");
+  await fetch("/subscribe", {
+    method: "POST",
+    body: JSON.stringify(subscription),
+    headers: {
+      "content-type": "application/json"
+    }
+  });
+  console.log("Sent push");
+}

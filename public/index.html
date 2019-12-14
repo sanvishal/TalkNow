@@ -1,96 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>TalkNow</title>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121889914-2"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-121889914-2"
+    ></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'UA-121889914-2');
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-121889914-2");
     </script>
-    <link href="/style.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#ffffff" />
+    <link href="/style.css" rel="stylesheet" media="all" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-</head>
-<body>
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
     <audio id="audio" src="audio/graceful.mp3"></audio>
-    <a class="btn-floating btn-large waves-effect waves-light modal-trigger z-depth-3" href="#users-list">
-        <i class="material-icons">arrow_downward</i>
+    <a
+      class="btn-floating btn-large waves-effect waves-light modal-trigger z-depth-3"
+      href="#users-list"
+    >
+      <i class="material-icons">arrow_downward</i>
     </a>
     <div id="main-chat" class="container z-depth-3">
-        <div id="chat-window">
-            <div id="users-list" class="modal bottom-sheet">
-                <div class="modal-header">
-                    <a href="#!" class="modal-close btn-floating btn-large waves-effect waves-light red"><i class="material-icons">clear</i></a>
-                </div>
-                <div class="modal-content">
-                    <h2>TalkNow</h2>
-                    <div class="credits" style="text-align: center;">Made with <i class="fa fa-code"> </i> and <i class="fa fa-heart">
-                        </i> by TK Vishal
-                        <a href="https://github.com/sanvishal" target="_blank"><i class="fa fa-github"></i></a>
-                        <a href="https://twitter.com/Iamteeekay" target="_blank"><i class="fa fa-twitter"></i></a>
-                        <a onclick="copyDivToClipboard()" id="wa" class="fixture good tooltipped" data-position="top"
-                            data-tooltip="+91 8248795811"><i class="fa fa-whatsapp"><span id="num"></span></i></a>
-                    </div>
-                    <h6>
-                        <div id="num-users"></div>
-                    </h6>
-                    <div class="divider"></div>
-                    <div id="list-items"></div>
-                </div>
+      <div id="chat-window">
+        <div id="users-list" class="modal bottom-sheet">
+          <div class="modal-header">
+            <a
+              href="#!"
+              class="modal-close btn-floating btn-large waves-effect waves-light red"
+              ><i class="material-icons">clear</i></a
+            >
+          </div>
+          <div class="modal-content">
+            <h2>TalkNow</h2>
+            <div class="credits" style="text-align: center;">
+              Made with <i class="fa fa-code"> </i> and
+              <i class="fa fa-heart"> </i> by TK Vishal
+              <a href="https://github.com/sanvishal" target="_blank"
+                ><i class="fa fa-github"></i
+              ></a>
+              <a href="https://twitter.com/Iamteeekay" target="_blank"
+                ><i class="fa fa-twitter"></i
+              ></a>
+              <a
+                onclick="copyDivToClipboard()"
+                id="wa"
+                class="fixture good tooltipped"
+                data-position="top"
+                data-tooltip="+91 8248795811"
+                ><i class="fa fa-whatsapp"><span id="num"></span></i
+              ></a>
             </div>
-            <div id="output">
-            </div>
-            <div id="typing"></div>
+            <h6>
+              <div id="num-users"></div>
+            </h6>
+            <div class="divider"></div>
+            <div id="list-items"></div>
+          </div>
         </div>
-        <div id="handler">
-            <div class="input-field">
-                <input id="handle" type="text" data-length="10">
-                <label for="handle">Your Name/Handle</label>
-            </div>
-            <button class="btn waves-effect waves-light" id="set-id">Set <i class="material-icons">check</i></button>
-            <button class="btn waves-effect waves-light" id="start-chat">Start <i class=" material-icons">check</i></button>
-        </div>
+        <div id="output"></div>
+        <div id="typing"></div>
+      </div>
+      <div id="handler">
         <div class="input-field">
-            <input class="materialize-textarea" type="text" id="message" placeholder="Message" autofocus="autofocus" />
-            <label for="message">Message</label>
+          <input id="handle" type="text" data-length="10" />
+          <label for="handle">Your Name/Handle</label>
         </div>
-        <button class="btn waves-effect waves-light" id="send">Send <i class="material-icons right">send</i></button>
+        <button class="btn waves-effect waves-light" id="set-id">
+          Set <i class="material-icons">check</i>
+        </button>
+        <button class="btn waves-effect waves-light" id="start-chat">
+          Start <i class=" material-icons">check</i>
+        </button>
+      </div>
+      <div class="input-field">
+        <input
+          class="materialize-textarea"
+          type="text"
+          id="message"
+          placeholder="Message"
+          autofocus="autofocus"
+        />
+        <label for="message">Message</label>
+      </div>
+      <button class="btn waves-effect waves-light" id="send">
+        Send <i class="material-icons right">send</i>
+      </button>
     </div>
     <script src="/chat.js"></script>
     <script src="/gif.js"></script>
     <script>
-        $(document).ready(function () {
-            var tool = document.getElementsByClassName("tooltip-content")[0]
-            tool.setAttribute("id", "copyable")
+      $(document).ready(function() {
+        var tool = document.getElementsByClassName("tooltip-content")[0];
+        tool.setAttribute("id", "copyable");
+      });
+      var elem = document.querySelector(".modal");
+      var instance = M.Modal.init(elem);
+      document.addEventListener("DOMContentLoaded", function() {
+        var elems = document.querySelectorAll(".tooltipped");
+        var inst = M.Tooltip.init(elems);
+      });
+      function copyDivToClipboard() {
+        var range = document.getSelection().getRangeAt(0);
+        range.selectNode(document.getElementById("copyable"));
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        M.toast({
+          html: "Number Copied to clipboard",
+          classes: "rounded"
         });
-        var elem = document.querySelector('.modal');
-        var instance = M.Modal.init(elem);
-        document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.tooltipped');
-            var inst = M.Tooltip.init(elems);
-        });
-        function copyDivToClipboard() {
-            var range = document.getSelection().getRangeAt(0);
-            range.selectNode(document.getElementById("copyable"));
-            window.getSelection().addRange(range);
-            document.execCommand("copy")
-            M.toast({
-                html:
-                    "Number Copied to clipboard",
-                classes: "rounded"
-            });
-        }
+      }
     </script>
-</body>
+  </body>
 </html>

@@ -1,6 +1,7 @@
+let gifLimit = 10;
 const API_KEY = "ltSIRvivUjymiHUW5l16l8LPoTvbolLe";
 const urlHead = "//api.giphy.com/v1/gifs/search?q=";
-const urlTail = "&api_key=" + API_KEY + "&limit=1";
+const urlTail = "&api_key=" + API_KEY + "&limit=" + gifLimit;
 
 var constructURL = query => {
   return urlHead + query + urlTail;
@@ -16,10 +17,11 @@ send.addEventListener("click", () => {
   var val = message.value;
   if (val[0] == "/") {
     isgif = true;
-    var prompt = val.slice(1, val.length).trim();
-    var URL = constructURL(prompt);
+    let prompt = val.slice(1, val.length).trim();
+    let URL = constructURL(prompt);
+    let randomGif = Math.floor(Math.random() * 10);
     $.getJSON(URL, data => {
-      var gifurl = data.data[0].images.original.url;
+      var gifurl = data.data[randomGif].images.original.url;
       socket.emit("chat", {
         username: handle.value,
         message: gifurl,
